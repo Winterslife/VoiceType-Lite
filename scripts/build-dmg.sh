@@ -8,7 +8,7 @@ BACKEND_DIR="$PROJECT_DIR/backend"
 RESOURCE_DIR="$APP_DIR/Resources"
 BUILD_DIR="$PROJECT_DIR/build"
 
-echo "=== VoiceType DMG Builder ==="
+echo "=== VoiceType-Lite DMG Builder ==="
 
 # 1. Copy backend files into app Resources
 echo "Step 1: Copying backend resources..."
@@ -48,12 +48,12 @@ xcodegen generate
 
 # 4. Build archive
 echo "Step 4: Building archive..."
-ARCHIVE_PATH="$BUILD_DIR/VoiceType.xcarchive"
+ARCHIVE_PATH="$BUILD_DIR/VoiceType-Lite.xcarchive"
 rm -rf "$ARCHIVE_PATH"
 
 xcodebuild archive \
-    -project "$APP_DIR/VoiceType.xcodeproj" \
-    -scheme VoiceType \
+    -project "$APP_DIR/VoiceType-Lite.xcodeproj" \
+    -scheme VoiceType-Lite \
     -configuration Release \
     -archivePath "$ARCHIVE_PATH" \
     CODE_SIGN_IDENTITY="-" \
@@ -63,10 +63,10 @@ xcodebuild archive \
 
 # 5. Export app from archive
 echo "Step 5: Exporting app..."
-APP_PATH="$ARCHIVE_PATH/Products/Applications/VoiceType.app"
+APP_PATH="$ARCHIVE_PATH/Products/Applications/VoiceType-Lite.app"
 
 if [ ! -d "$APP_PATH" ]; then
-    echo "Error: VoiceType.app not found in archive."
+    echo "Error: VoiceType-Lite.app not found in archive."
     echo "Looking for app in archive..."
     find "$ARCHIVE_PATH" -name "*.app" -type d
     exit 1
@@ -75,7 +75,7 @@ fi
 # 6. Create DMG
 echo "Step 6: Creating DMG..."
 DMG_DIR="$BUILD_DIR/dmg-staging"
-DMG_PATH="$BUILD_DIR/VoiceType.dmg"
+DMG_PATH="$BUILD_DIR/VoiceType-Lite.dmg"
 
 rm -rf "$DMG_DIR"
 rm -f "$DMG_PATH"
@@ -85,7 +85,7 @@ cp -R "$APP_PATH" "$DMG_DIR/"
 ln -s /Applications "$DMG_DIR/Applications"
 
 hdiutil create \
-    -volname "VoiceType" \
+    -volname "VoiceType-Lite" \
     -srcfolder "$DMG_DIR" \
     -ov \
     -format UDZO \
