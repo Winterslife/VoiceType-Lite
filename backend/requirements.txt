@@ -1,0 +1,8 @@
+funasr
+torch
+torchaudio
+fastapi
+python-multipart
+uvicorn[standard]
+soundfile
+numpy

@@ -1,0 +1,67 @@
+name: VoiceType-Lite
+options:
+  bundleIdPrefix: com.voicetype-lite
+  deploymentTarget:
+    macOS: "13.0"
+  xcodeVersion: "15.0"
+  generateEmptyDirectories: true
+
+targets:
+  VoiceType-Lite:
+    type: application
+    platform: macOS
+    sources:
+      - VoiceType
+      - path: Resources
+        buildPhase: resources
+        type: folder
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.voicetype-lite.app
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: true
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: "VoiceType-Lite needs microphone access to transcribe your speech."
+        INFOPLIST_KEY_LSUIElement: true
+        SWIFT_STRICT_CONCURRENCY: complete
+        CODE_SIGN_IDENTITY: "Apple Development"
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: VoiceType/VoiceType.entitlements
+    preBuildScripts:
+      - name: Prepare Backend Resources
+        script: |
+          set -e
+          RESOURCE_DIR="${SRCROOT}/Resources"
+          BACKEND_SRC="${SRCROOT}/../backend"
+
+          # Copy backend files
+          mkdir -p "${RESOURCE_DIR}/backend"
+          cp "${BACKEND_SRC}/server.py" "${RESOURCE_DIR}/backend/"
+          cp "${BACKEND_SRC}/requirements.txt" "${RESOURCE_DIR}/backend/"
+
+          # Download uv if not present
+          if [ ! -f "${RESOURCE_DIR}/uv" ]; then
+            ARCH=$(uname -m)
+            if [ "$ARCH" = "arm64" ]; then
+              UV_URL="https://github.com/astral-sh/uv/releases/latest/download/uv-aarch64-apple-darwin.tar.gz"
+            else
+              UV_URL="https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-apple-darwin.tar.gz"
+            fi
+            echo "Downloading uv from ${UV_URL}..."
+            curl -fsSL "${UV_URL}" -o /tmp/uv.tar.gz
+            tar -xzf /tmp/uv.tar.gz -C /tmp/
+            # The binary is inside a directory named uv-<arch>-apple-darwin/
+            UV_BIN=$(find /tmp/uv-*-apple-darwin* -name "uv" -type f 2>/dev/null | head -1)
+            if [ -z "$UV_BIN" ]; then
+              # Fallback: might be directly extracted
+              UV_BIN="/tmp/uv"
+            fi
+            cp "$UV_BIN" "${RESOURCE_DIR}/uv"
+            chmod +x "${RESOURCE_DIR}/uv"
+            rm -f /tmp/uv.tar.gz
+            rm -rf /tmp/uv-*-apple-darwin*
+          fi
+        outputFiles:
+          - $(SRCROOT)/Resources/backend/server.py
+          - $(SRCROOT)/Resources/backend/requirements.txt
+          - $(SRCROOT)/Resources/uv
