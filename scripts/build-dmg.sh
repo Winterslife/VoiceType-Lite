@@ -57,8 +57,8 @@ xcodebuild archive \
     -configuration Release \
     -archivePath "$ARCHIVE_PATH" \
     CODE_SIGN_IDENTITY="-" \
-    CODE_SIGNING_REQUIRED=NO \
-    CODE_SIGNING_ALLOWED=NO \
+    CODE_SIGNING_REQUIRED=YES \
+    CODE_SIGNING_ALLOWED=YES \
     | tail -20
 
 # 5. Export app from archive
@@ -71,6 +71,12 @@ if [ ! -d "$APP_PATH" ]; then
     find "$ARCHIVE_PATH" -name "*.app" -type d
     exit 1
 fi
+
+# 5.5. Ad-hoc codesign (ensures all frameworks/dylibs are signed)
+echo "Step 5.5: Ad-hoc signing app bundle..."
+codesign --force --deep --sign - "$APP_PATH"
+echo "  Signed. Verifying..."
+codesign -dv "$APP_PATH" 2>&1 | head -5
 
 # 6. Create DMG
 echo "Step 6: Creating DMG..."
