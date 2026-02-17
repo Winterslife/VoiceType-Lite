@@ -70,7 +70,7 @@ Go to the [Releases](../../releases) page to download the latest DMG.
 
 ```bash
 # 1. 克隆仓库 / Clone the repo
-git clone https://github.com/user/VoiceType-Lite.git  # TODO: 替换为实际地址
+git clone https://github.com/Winterslife/VoiceType-Lite.git
 cd VoiceType-Lite
 
 # 2. 安装 xcodegen / Install xcodegen
