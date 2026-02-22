@@ -170,8 +170,8 @@ VoiceType-Lite/
 | 无需注册 / No Account | ✅ | ✅ | ❌ | ❌ |
 | macOS 原生 / Native macOS | ✅ | ✅ | ✅ | ❌ 网页端 |
 
-# 如果这个项目对你有帮助，欢迎点个 ⭐ Star 支持！
-# If you find this useful, a ⭐ star would mean a lot!
+## 如果这个项目对你有帮助，欢迎点个 ⭐ Star 支持！
+## If you find this useful, a ⭐ star would mean a lot!
 
 ## 致谢 / Acknowledgments
 
