@@ -20,6 +20,43 @@ struct VoiceTypeApp: App {
 
                 Divider()
 
+                // Microphone selector
+                Menu {
+                    Button {
+                        appState.selectInputDevice(nil)
+                    } label: {
+                        HStack {
+                            Text("System Default")
+                            if appState.selectedDeviceID == nil {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+
+                    if !appState.inputDevices.isEmpty {
+                        Divider()
+                        ForEach(appState.inputDevices) { device in
+                            Button {
+                                appState.selectInputDevice(device.id)
+                            } label: {
+                                HStack {
+                                    Text(device.name)
+                                    if appState.selectedDeviceID == device.id {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } label: {
+                    Label(selectedMicName, systemImage: "mic")
+                }
+                .onAppear {
+                    appState.refreshInputDevices()
+                }
+
+                Divider()
+
                 Text("Right Option: push-to-talk")
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -67,5 +104,13 @@ struct VoiceTypeApp: App {
         case .error(let message):
             return message
         }
+    }
+
+    private var selectedMicName: String {
+        if let id = appState.selectedDeviceID,
+           let device = appState.inputDevices.first(where: { $0.id == id }) {
+            return device.name
+        }
+        return "Microphone"
     }
 }

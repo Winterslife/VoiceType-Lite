@@ -1,5 +1,11 @@
 import AVFoundation
+import CoreAudio
 import Foundation
+
+struct AudioInputDevice: Identifiable, Equatable {
+    let id: AudioDeviceID
+    let name: String
+}
 
 final class AudioRecorder {
     private var audioEngine: AVAudioEngine?
@@ -7,10 +13,91 @@ final class AudioRecorder {
     private let bufferLock = NSLock()
     private let sampleRate: Double = 16000.0
 
+    /// nil means use the system default input device
+    var selectedDeviceID: AudioDeviceID? = nil
+
     var isRecording: Bool { audioEngine != nil }
+
+    // MARK: - Device Enumeration
+
+    static func availableInputDevices() -> [AudioInputDevice] {
+        var propertyAddress = AudioObjectPropertyAddress(
+            mSelector: kAudioHardwarePropertyDevices,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+
+        var dataSize: UInt32 = 0
+        guard AudioObjectGetPropertyDataSize(
+            AudioObjectID(kAudioObjectSystemObject),
+            &propertyAddress,
+            0, nil,
+            &dataSize
+        ) == noErr else { return [] }
+
+        let deviceCount = Int(dataSize) / MemoryLayout<AudioDeviceID>.size
+        var deviceIDs = [AudioDeviceID](repeating: 0, count: deviceCount)
+        guard AudioObjectGetPropertyData(
+            AudioObjectID(kAudioObjectSystemObject),
+            &propertyAddress,
+            0, nil,
+            &dataSize,
+            &deviceIDs
+        ) == noErr else { return [] }
+
+        return deviceIDs.compactMap { deviceID in
+            // Check if this device has input channels
+            var inputAddress = AudioObjectPropertyAddress(
+                mSelector: kAudioDevicePropertyStreamConfiguration,
+                mScope: kAudioDevicePropertyScopeInput,
+                mElement: kAudioObjectPropertyElementMain
+            )
+            var inputSize: UInt32 = 0
+            guard AudioObjectGetPropertyDataSize(deviceID, &inputAddress, 0, nil, &inputSize) == noErr,
+                  inputSize > 0 else { return nil }
+
+            var bufferList = AudioBufferList()
+            var bufferListSize = UInt32(MemoryLayout<AudioBufferList>.size)
+            guard AudioObjectGetPropertyData(deviceID, &inputAddress, 0, nil, &bufferListSize, &bufferList) == noErr,
+                  bufferList.mNumberBuffers > 0 else { return nil }
+
+            // Get device name
+            var nameAddress = AudioObjectPropertyAddress(
+                mSelector: kAudioDevicePropertyDeviceNameCFString,
+                mScope: kAudioObjectPropertyScopeGlobal,
+                mElement: kAudioObjectPropertyElementMain
+            )
+            var unmanagedName: Unmanaged<CFString>? = nil
+            var nameSize = UInt32(MemoryLayout<Unmanaged<CFString>>.size)
+            guard AudioObjectGetPropertyData(deviceID, &nameAddress, 0, nil, &nameSize, &unmanagedName) == noErr,
+                  let unmanagedName else { return nil }
+            let deviceName = unmanagedName.takeRetainedValue() as String
+
+            return AudioInputDevice(id: deviceID, name: deviceName)
+        }
+    }
+
+    // MARK: - Recording
 
     func startRecording() throws {
         let engine = AVAudioEngine()
+
+        // Set specific input device if selected
+        if let deviceID = selectedDeviceID {
+            var id = deviceID
+            let err = AudioUnitSetProperty(
+                engine.inputNode.audioUnit!,
+                kAudioOutputUnitProperty_CurrentDevice,
+                kAudioUnitScope_Global,
+                0,
+                &id,
+                UInt32(MemoryLayout<AudioDeviceID>.size)
+            )
+            if err != noErr {
+                print("[AudioRecorder] Failed to set input device \(deviceID): \(err), using default")
+            }
+        }
+
         let inputNode = engine.inputNode
         let inputFormat = inputNode.outputFormat(forBus: 0)
 
@@ -101,14 +188,14 @@ final class AudioRecorder {
 
         // fmt chunk
         data.append(contentsOf: [UInt8]("fmt ".utf8))
-        data.append(contentsOf: withUnsafeBytes(of: UInt32(16).littleEndian) { Array($0) })        // chunk size
-        data.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })         // PCM format
-        data.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })         // mono
-        data.append(contentsOf: withUnsafeBytes(of: UInt32(sampleRate).littleEndian) { Array($0) }) // sample rate
+        data.append(contentsOf: withUnsafeBytes(of: UInt32(16).littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: UInt32(sampleRate).littleEndian) { Array($0) })
         let byteRate = UInt32(sampleRate * 2)
-        data.append(contentsOf: withUnsafeBytes(of: byteRate.littleEndian) { Array($0) })           // byte rate
-        data.append(contentsOf: withUnsafeBytes(of: UInt16(2).littleEndian) { Array($0) })          // block align
-        data.append(contentsOf: withUnsafeBytes(of: UInt16(16).littleEndian) { Array($0) })         // bits per sample
+        data.append(contentsOf: withUnsafeBytes(of: byteRate.littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: UInt16(2).littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: UInt16(16).littleEndian) { Array($0) })
 
         // data chunk
         data.append(contentsOf: [UInt8]("data".utf8))

@@ -1,11 +1,19 @@
 # VoiceType-Lite
 
+[![GitHub stars](https://img.shields.io/github/stars/Winterslife/VoiceType-Lite?style=social)](https://github.com/Winterslife/VoiceType-Lite)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![macOS 13.0+](https://img.shields.io/badge/macOS-13.0%2B-brightgreen.svg)](https://www.apple.com/macos/)
+[![Latest Release](https://img.shields.io/github/v/release/Winterslife/VoiceType-Lite)](https://github.com/Winterslife/VoiceType-Lite/releases)
+
 **开源、本地、隐私优先的 macOS 语音输入工具**
 
 **Open-source, local, privacy-first voice input for macOS**
 
-<!-- TODO: 添加演示 GIF -->
-<!-- TODO: Add demo GIF -->
+<p align="center">
+  <img src="assets/demo.gif" alt="VoiceType-Lite Demo" width="600">
+  <br>
+  <em>按住右 Option 键说话 → 松开 → 文字自动输入 / Hold Right Option → Speak → Release → Text appears</em>
+</p>
 
 ---
 
@@ -150,6 +158,21 @@ VoiceType-Lite/
 ├── LICENSE                     # MIT 协议
 └── README.md
 ```
+
+## 对比 / Comparison
+
+| 特性 / Feature | VoiceType-Lite | 闪电说 | Typeless | 豆包语音 |
+|---|---|---|---|---|
+| 开源 / Open Source | ✅ MIT | ❌ | ❌ | ❌ |
+| 完全本地 / Fully Local | ✅ | ✅ | ❌ 需联网 | ❌ 需联网 |
+| 免费 / Free | ✅ | ✅ | ❌ 订阅制 | ✅ |
+| 隐私可审计 / Auditable | ✅ | ❌ | ❌ | ❌ |
+| 中文优化 / Chinese Optimized | ✅ | ✅ | ✅ | ✅ |
+| 无需注册 / No Account | ✅ | ✅ | ❌ | ❌ |
+| macOS 原生 / Native macOS | ✅ | ✅ | ✅ | ❌ 网页端 |
+
+<!-- ## 媒体报道 / Featured In -->
+<!-- 被报道后在此添加链接 / Add links here after press coverage -->
 
 ## 致谢 / Acknowledgments
 

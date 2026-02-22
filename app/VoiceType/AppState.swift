@@ -1,4 +1,5 @@
 import Cocoa
+import CoreAudio
 import SwiftUI
 
 enum AppStatus: Equatable {
@@ -13,6 +14,8 @@ final class AppState: ObservableObject {
     @Published var status: AppStatus = .idle
     @Published var backendAvailable = false
     @Published var lastTranscription: String?
+    @Published var inputDevices: [AudioInputDevice] = []
+    @Published var selectedDeviceID: AudioDeviceID? = nil
 
     let audioRecorder = AudioRecorder()
     let hotkeyListener = HotkeyListener()
@@ -25,6 +28,7 @@ final class AppState: ObservableObject {
     private var isHealthChecking = false
 
     init() {
+        refreshInputDevices()
         // Start health checks immediately if setup is already done.
         // Hotkey listener is deferred to avoid interfering with
         // MenuBarExtra's event handling during scene setup.
@@ -37,6 +41,15 @@ final class AppState: ObservableObject {
                 self?.startHotkeyListener()
             }
         }
+    }
+
+    func refreshInputDevices() {
+        inputDevices = AudioRecorder.availableInputDevices()
+    }
+
+    func selectInputDevice(_ deviceID: AudioDeviceID?) {
+        selectedDeviceID = deviceID
+        audioRecorder.selectedDeviceID = deviceID
     }
 
     func attachBackend(_ manager: BackendManager) {
