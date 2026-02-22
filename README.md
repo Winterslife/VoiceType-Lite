@@ -1,5 +1,4 @@
 # VoiceType-Lite
-
 [![GitHub stars](https://img.shields.io/github/stars/Winterslife/VoiceType-Lite?style=social)](https://github.com/Winterslife/VoiceType-Lite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![macOS 13.0+](https://img.shields.io/badge/macOS-13.0%2B-brightgreen.svg)](https://www.apple.com/macos/)
@@ -171,8 +170,8 @@ VoiceType-Lite/
 | 无需注册 / No Account | ✅ | ✅ | ❌ | ❌ |
 | macOS 原生 / Native macOS | ✅ | ✅ | ✅ | ❌ 网页端 |
 
-<!-- ## 媒体报道 / Featured In -->
-<!-- 被报道后在此添加链接 / Add links here after press coverage -->
+# 如果这个项目对你有帮助，欢迎点个 ⭐ Star 支持！
+# If you find this useful, a ⭐ star would mean a lot!
 
 ## 致谢 / Acknowledgments
 
