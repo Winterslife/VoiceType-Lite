@@ -15,20 +15,25 @@ targets:
       - path: Resources
         buildPhase: resources
         type: folder
+    info:
+      path: VoiceType/Info.plist
+      properties:
+        CFBundleIconFile: AppIcon
+        LSUIElement: true
+        NSMicrophoneUsageDescription: "VoiceType-Lite needs microphone access to transcribe your speech."
+        CFBundleShortVersionString: "1.1.0"
+        CFBundleVersion: "2"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.voicetype-lite.app
-        MARKETING_VERSION: "1.0.0"
-        CURRENT_PROJECT_VERSION: "1"
-        GENERATE_INFOPLIST_FILE: true
-        INFOPLIST_KEY_NSMicrophoneUsageDescription: "VoiceType-Lite needs microphone access to transcribe your speech."
-        INFOPLIST_KEY_LSUIElement: true
+        MARKETING_VERSION: "1.1.0"
+        CURRENT_PROJECT_VERSION: "2"
+        GENERATE_INFOPLIST_FILE: false
+        INFOPLIST_FILE: VoiceType/Info.plist
         SWIFT_STRICT_CONCURRENCY: complete
         CODE_SIGN_IDENTITY: "Apple Development"
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_ENTITLEMENTS: VoiceType/VoiceType.entitlements
-        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        INFOPLIST_KEY_CFBundleIconFile: AppIcon
     preBuildScripts:
       - name: Prepare Backend Resources
         script: |
