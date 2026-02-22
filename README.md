@@ -22,7 +22,7 @@
 - **一键语音输入** — 按住右 Option 键说话，松开即输入文字
 - **自动标点** — 智能添加中文标点符号
 - **菜单栏常驻** — 轻量运行，不干扰工作流
-- **开源透明** — 代码可审计，MIT 协议
+- **开源透明** — 代码可审计
 
 ---
 
@@ -30,7 +30,7 @@
 - **Push-to-talk** — Hold Right Option key to speak, release to insert text
 - **Auto punctuation** — Intelligent Chinese punctuation via SenseVoiceSmall
 - **Menu bar app** — Lightweight, stays out of your way
-- **Open source** — Auditable code, MIT license
+- **Open source** — Auditable code
 
 ## 技术架构 / Architecture
 
