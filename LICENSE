@@ -1,21 +1,105 @@
-MIT License
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
 
 Copyright (c) 2025 VoiceType-Lite Contributors
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+"Commons Clause" License Condition v1.0
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+The Software is provided to you by the Licensor under the License, as
+defined below, subject to the following condition.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Without limiting other conditions in the License, the grant of rights
+under the License will not include, and the License does not grant to
+you, the right to Sell the Software.
+
+For purposes of the foregoing, "Sell" means practicing any or all of
+the rights granted to you under the License to provide to third parties,
+for a fee or other consideration (including without limitation fees for
+hosting or consulting/ support services related to the Software), a
+product or service whose value derives, entirely or substantially, from
+the functionality of the Software. Any license notice or attribution
+required by the License must also include this Commons Clause License
+Condition notice.
+
+Software: VoiceType-Lite
+License: GNU General Public License v3.0
+Licensor: VoiceType-Lite Contributors
+
+---
+
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+Everyone is permitted to copy and distribute verbatim copies of this
+license document, but changing it is not allowed.
+
+TERMS AND CONDITIONS
+
+0. Definitions.
+
+"This License" refers to version 3 of the GNU General Public License.
+
+"The Program" refers to any copyrightable work licensed under this
+License.
+
+"You" refers to the licensee.
+
+1. Source Code.
+
+The source code for a work means the preferred form of the work for
+making modifications to it. You may copy and distribute verbatim copies
+of the Program's source code as you receive it, in any medium, provided
+that you conspicuously and appropriately publish on each copy an
+appropriate copyright notice; keep intact all notices stating that this
+License applies to the code; and give any recipients of the Program a
+copy of this License along with the Program.
+
+2. Basic Permissions.
+
+All rights granted under this License are granted for the term of
+copyright on the Program, and are irrevocable provided the stated
+conditions are met. This License explicitly affirms your unlimited
+permission to run the unmodified Program.
+
+3. Protecting Users' Legal Rights From Anti-Circumvention Law.
+
+No covered work shall be deemed part of an effective technological
+measure under any applicable law.
+
+4. Conveying Verbatim Copies.
+
+You may convey verbatim copies of the Program's source code as you
+receive it, provided that you retain all copyright, license, and
+disclaimer notices.
+
+5. Conveying Modified Source Versions.
+
+You may convey a work based on the Program, or modifications to produce
+it from the Program, in the form of source code under the terms of
+section 4, provided that you also meet all of these conditions:
+
+  a) The work must carry prominent notices stating that you modified it.
+  b) The work must carry prominent notices stating it is released under
+     this License and the Commons Clause condition above.
+  c) You must license the entire work under this License to anyone who
+     comes into possession of a copy.
+
+6. No Surrender of Others' Freedom.
+
+If conditions are imposed on you that contradict the conditions of this
+License, they do not excuse you from the conditions of this License.
+
+7. Disclaimer of Warranty.
+
+THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
+APPLICABLE LAW.
+
+8. Limitation of Liability.
+
+IN NO EVENT WILL ANY COPYRIGHT HOLDER BE LIABLE TO YOU FOR DAMAGES.
+
+---
+
+For the full text of the GNU General Public License v3, see:
+https://www.gnu.org/licenses/gpl-3.0.txt

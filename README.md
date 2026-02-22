@@ -1,6 +1,6 @@
 # VoiceType-Lite
 [![GitHub stars](https://img.shields.io/github/stars/Winterslife/VoiceType-Lite?style=social)](https://github.com/Winterslife/VoiceType-Lite)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: GPL v3 + Commons Clause](https://img.shields.io/badge/License-GPL%20v3%20%2B%20Commons%20Clause-blue.svg)](LICENSE)
 [![macOS 13.0+](https://img.shields.io/badge/macOS-13.0%2B-brightgreen.svg)](https://www.apple.com/macos/)
 [![Latest Release](https://img.shields.io/github/v/release/Winterslife/VoiceType-Lite)](https://github.com/Winterslife/VoiceType-Lite/releases)
 
@@ -182,4 +182,18 @@ VoiceType-Lite/
 
 ## 许可证 / License
 
-[MIT](LICENSE)
+本项目采用 **GPL v3 + Commons Clause** 协议。
+
+- 你可以自由使用、学习、修改和分发本项目
+- 基于本项目的衍生作品必须同样开源
+- **禁止将本软件直接用于商业销售**（包括打包售卖、SaaS 收费等）
+- 商业合作请联系作者
+
+---
+
+This project is licensed under **GPL v3 + Commons Clause**.
+
+- You may freely use, study, modify, and distribute this project
+- Derivative works must also be open-source under the same license
+- **Commercial sale of this software is not permitted** without authorization
+- For commercial licensing, please contact the author
